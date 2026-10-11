@@ -23,31 +23,21 @@ A fast, keyboard-driven terminal interface for Trello. It's meant to replace the
 
 ## Install
 
-Requires Go 1.25+ (this repo pins it via `mise.toml`).
+One codebase runs on both macOS (Apple Silicon) and Linux. Platform differences, like opening links (`open` vs `xdg-open`) and the clipboard (`pbcopy` vs `wl-copy`/`xclip`), are detected at runtime. Each OS still needs its own compiled binary, and the install script builds the right one for whatever machine you run it on:
 
 ```sh
-go build -o trello-tui . && mv trello-tui ~/.local/bin/
-# or: mise exec -- go build -o trello-tui .
+./scripts/install.sh          # builds for this machine, installs to ~/.local/bin
 ```
 
-### macOS
+This needs Go 1.25+ (`brew install go` on a Mac; this repo also pins Go via `mise.toml`).
 
-It's the same app, cross-compiled. On any machine with Go, run:
+To build both binaries from one machine instead:
 
 ```sh
-./scripts/build-release.sh   # writes dist/trello-tui-{darwin,linux}-{arm64,amd64}
+./scripts/build-release.sh    # dist/trello-tui-darwin-arm64, dist/trello-tui-linux-amd64
 ```
 
-Copy `dist/trello-tui-darwin-arm64` to your Mac (use `-darwin-amd64` for Intel Macs), then:
-
-```sh
-mv trello-tui-darwin-arm64 /usr/local/bin/trello-tui && chmod +x /usr/local/bin/trello-tui
-xattr -d com.apple.quarantine /usr/local/bin/trello-tui 2>/dev/null  # only if macOS blocks the unsigned binary
-```
-
-Or build it on the Mac directly: `brew install go && go build -o /usr/local/bin/trello-tui .`
-
-On macOS, links open with `open` and copying uses `pbcopy`. Config is stored in `~/.config/trello-tui`, the same as on Linux.
+If you copy a prebuilt binary to a Mac and macOS blocks it as unsigned, run `xattr -d com.apple.quarantine <path>`.
 
 Try it without an account:
 
