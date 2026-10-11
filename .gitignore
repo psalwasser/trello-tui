@@ -1,3 +1,7 @@
 /trello-tui
 /dist/
 .claude/
+
+# Never commit credentials
+.env
+config.json

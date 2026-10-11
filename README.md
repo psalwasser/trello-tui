@@ -23,37 +23,49 @@ A fast, keyboard-driven terminal interface for Trello. It's meant to replace the
 
 ## Install
 
-One codebase runs on both macOS (Apple Silicon) and Linux. Platform differences, like opening links (`open` vs `xdg-open`) and the clipboard (`pbcopy` vs `wl-copy`/`xclip`), are detected at runtime. Each OS still needs its own compiled binary, and the install script builds the right one for whatever machine you run it on:
+One codebase runs on both macOS (Apple Silicon) and Linux. Platform differences, like opening links (`open` vs `xdg-open`) and the clipboard (`pbcopy` vs `wl-copy`/`xclip`), are detected at runtime. The install script builds the right binary for whatever machine you run it on.
+
+**Prerequisites:** `git` and Go 1.25+. On a Mac: `brew install go` (git comes with the Xcode command-line tools). On Linux: use your package manager, or `mise` (this repo pins Go in `mise.toml`).
+
+### First install (any machine)
 
 ```sh
+git clone https://github.com/philsalwasser/trello-tui.git
+cd trello-tui
 ./scripts/install.sh          # builds for this machine, installs to ~/.local/bin
+trello-tui                    # first run walks you through Trello setup (below)
 ```
 
-This needs Go 1.25+ (`brew install go` on a Mac; this repo also pins Go via `mise.toml`).
+If the script says `~/.local/bin` isn't on your PATH, add the line it prints to `~/.zshrc` (macOS) or `~/.bashrc`, then open a new terminal. To install somewhere else, pass the directory: `./scripts/install.sh /usr/local/bin`.
 
-To build both binaries from one machine instead:
+### Updating
 
 ```sh
-./scripts/build-release.sh    # dist/trello-tui-darwin-arm64, dist/trello-tui-linux-amd64
+cd trello-tui
+git pull
+./scripts/install.sh
 ```
 
-If you copy a prebuilt binary to a Mac and macOS blocks it as unsigned, run `xattr -d com.apple.quarantine <path>`.
+Your Trello credentials and cache are kept outside the repo, so updating never touches them.
 
-Try it without an account:
+### Other options
 
-```sh
-trello-tui --demo
-```
+- **Try it without an account:** `trello-tui --demo`
+- **Build binaries for both platforms from one machine:** `./scripts/build-release.sh` writes `dist/trello-tui-darwin-arm64` and `dist/trello-tui-linux-amd64`. If you copy a binary to a Mac and macOS blocks it as unsigned, run `xattr -d com.apple.quarantine <path>`.
 
 ## Setup
 
-On first launch, `trello-tui` walks you through authentication (re-run it any time with `trello-tui auth`):
+On first launch on each machine, `trello-tui` walks you through authentication (re-run it any time with `trello-tui auth`):
 
-1. Create a Power-Up at <https://trello.com/power-ups/admin> (any name), open its **API key** tab and generate a key.
+1. Create a Power-Up at <https://trello.com/power-ups/admin> (any name), open its **API key** tab and generate a key. You only need to do this once. Use the same key on every machine.
 2. Paste the key. The tool opens Trello's authorize page, where you approve access and copy the token.
 3. Paste the token. It is checked against the API and then saved to `~/.config/trello-tui/config.json` (mode 0600).
 
-You can also set `TRELLO_API_KEY` and `TRELLO_TOKEN` in the environment.
+You can also set `TRELLO_API_KEY` and `TRELLO_TOKEN` in the environment instead.
+
+### Where your credentials live
+
+Your API key and token are **never stored in this repository**. They are saved only in `~/.config/trello-tui/config.json` in your home directory, readable only by you. Cached board data goes in `~/.cache/trello-tui/`. Neither is inside the repo, so nothing secret can be committed or pushed to GitHub. Treat the token like a password: anyone who has it can read and edit your boards. You can revoke it any time under Trello → Settings → Applications.
 
 ## Keys
 
