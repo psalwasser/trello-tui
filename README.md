@@ -30,6 +30,25 @@ go build -o trello-tui . && mv trello-tui ~/.local/bin/
 # or: mise exec -- go build -o trello-tui .
 ```
 
+### macOS
+
+It's the same app, cross-compiled. On any machine with Go, run:
+
+```sh
+./scripts/build-release.sh   # writes dist/trello-tui-{darwin,linux}-{arm64,amd64}
+```
+
+Copy `dist/trello-tui-darwin-arm64` to your Mac (use `-darwin-amd64` for Intel Macs), then:
+
+```sh
+mv trello-tui-darwin-arm64 /usr/local/bin/trello-tui && chmod +x /usr/local/bin/trello-tui
+xattr -d com.apple.quarantine /usr/local/bin/trello-tui 2>/dev/null  # only if macOS blocks the unsigned binary
+```
+
+Or build it on the Mac directly: `brew install go && go build -o /usr/local/bin/trello-tui .`
+
+On macOS, links open with `open` and copying uses `pbcopy`. Config is stored in `~/.config/trello-tui`, the same as on Linux.
+
 Try it without an account:
 
 ```sh

@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"os/exec"
+	"runtime"
 	"strings"
 	"time"
 
@@ -100,7 +101,7 @@ func runAuth() (config.Config, error) {
 	fmt.Println()
 	fmt.Println("2. Authorize trello-tui to get a token. Opening:")
 	fmt.Println("   " + authURL)
-	_ = exec.Command("xdg-open", authURL).Start()
+	openBrowser(authURL)
 	fmt.Println()
 	token := ask("   Token: ")
 	if token == "" {
@@ -119,6 +120,14 @@ func runAuth() (config.Config, error) {
 	}
 	fmt.Printf("\nSigned in as %s (@%s). Saved to %s\n", me.FullName, me.Username, config.ConfigPath())
 	return cfg, nil
+}
+
+func openBrowser(u string) {
+	opener := "xdg-open"
+	if runtime.GOOS == "darwin" {
+		opener = "open"
+	}
+	_ = exec.Command(opener, u).Start()
 }
 
 func hintExisting(v string) string {
