@@ -59,7 +59,8 @@ Press `?` in the app for the full list.
 | `M` | move card to any list |
 | `e` / `E` | rename / edit description in `$EDITOR` |
 | `t` / `m` / `space` | labels / members / join or leave |
-| `d` / `D` | due date (`fri 3pm`, `+3d`, `10/15`, `tomorrow`…) / toggle complete |
+| `D` | mark done / not done |
+| `d` | due date (`fri 3pm`, `+3d`, `10/15`, `tomorrow`…) |
 | `x` | archive card |
 | `N` / `R` / `X` | new list / rename list / archive list |
 | `/` | filter: text, `#label`, `@member`, `due`, `overdue` |
@@ -72,6 +73,7 @@ Press `?` in the app for the full list.
 | `j k` + `space` | select and toggle checklist items |
 | `a` / `N` / `X` | add item / new checklist / delete item |
 | `c` / `C` | comment inline / in `$EDITOR` |
+| `D` / `A` | mark done / archive |
 | `H L` | move card to previous/next list |
 | `esc` | back |
 

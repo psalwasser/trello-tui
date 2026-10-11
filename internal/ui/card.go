@@ -557,6 +557,8 @@ func (m *Model) viewCard(h int) string {
 			s += sErr.Render("  overdue")
 		}
 		add(label("Due") + s)
+	} else if c.DueComplete {
+		add(label("Status") + sOK.Render("✓ Done"))
 	}
 	add("")
 

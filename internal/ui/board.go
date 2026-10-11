@@ -514,12 +514,13 @@ func (m *Model) promptDue(id string) tea.Cmd {
 
 func (m *Model) toggleDueComplete(id string) tea.Cmd {
 	c := m.board.card(id)
-	if c.Due == nil {
-		m.setStatus("Card has no due date (d to set one)", true)
-		return nil
-	}
 	done := !c.DueComplete
-	return m.updateCard(id, func(c *trello.Card) { c.DueComplete = done }, trello.CardUpdate{DueComplete: &done}, "update due")
+	if done {
+		m.setStatus("Marked done ✓  (x to archive)", false)
+	} else {
+		m.setStatus("Marked not done", false)
+	}
+	return m.updateCard(id, func(c *trello.Card) { c.DueComplete = done }, trello.CardUpdate{DueComplete: &done}, "mark done")
 }
 
 func toggleID(ids []string, id string) []string {
@@ -892,6 +893,8 @@ func (m *Model) viewCard1(c *trello.Card, w int, selected bool) string {
 		badge := ""
 		if c.Due != nil {
 			badge = dueStyle(*c.Due, c.DueComplete, now).Render(fmtDue(*c.Due, now))
+		} else if c.DueComplete {
+			badge = sOK.Render("✓ Done")
 		}
 		line := spread(bar+" "+c.Name, badge, w-1)
 		if selected {
@@ -940,6 +943,8 @@ func (m *Model) viewCard1(c *trello.Card, w int, selected bool) string {
 			icon = "✓ "
 		}
 		badges = append(badges, dueStyle(*c.Due, c.DueComplete, now).Render(icon+fmtDue(*c.Due, now)))
+	} else if c.DueComplete {
+		badges = append(badges, sOK.Render("✓ Done"))
 	}
 	if c.Badges.Description {
 		badges = append(badges, sDim.Render("≡"))

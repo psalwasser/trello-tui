@@ -531,9 +531,9 @@ func (m *Model) hints() string {
 	case screenBoards:
 		parts = []string{k("enter", "open"), k("/", "filter"), k("r", "refresh"), k("q", "quit")}
 	case screenBoard:
-		parts = []string{k("hjkl", "move"), k("enter", "open"), k("n", "new"), k("HJKL", "drag"), k("t", "labels"), k("d", "due"), k("/", "filter"), k("b", "boards")}
+		parts = []string{k("hjkl", "move"), k("enter", "open"), k("n", "new"), k("HJKL", "drag"), k("D", "done"), k("x", "archive"), k("d", "due"), k("/", "filter")}
 	case screenCard:
-		parts = []string{k("e", "title"), k("E", "desc"), k("c", "comment"), k("space", "check"), k("a", "item"), k("t", "labels"), k("esc", "back")}
+		parts = []string{k("e", "title"), k("E", "desc"), k("c", "comment"), k("space", "check"), k("D", "done"), k("A", "archive"), k("esc", "back")}
 	}
 	return strings.Join(parts, "  ")
 }
