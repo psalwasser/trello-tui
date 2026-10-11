@@ -1,4 +1,4 @@
-module github.com/philsalwasser/trello-tui
+module github.com/psalwasser/trello-tui
 
 go 1.25.14
 

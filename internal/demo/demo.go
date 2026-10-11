@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/philsalwasser/trello-tui/internal/trello"
+	"github.com/psalwasser/trello-tui/internal/trello"
 )
 
 type Backend struct {

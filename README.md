@@ -30,7 +30,7 @@ One codebase runs on both macOS (Apple Silicon) and Linux. Platform differences,
 ### First install (any machine)
 
 ```sh
-git clone https://github.com/philsalwasser/trello-tui.git
+git clone https://github.com/psalwasser/trello-tui.git
 cd trello-tui
 ./scripts/install.sh          # builds for this machine, installs to ~/.local/bin
 trello-tui                    # first run walks you through Trello setup (below)

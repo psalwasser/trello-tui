@@ -8,7 +8,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/philsalwasser/trello-tui/internal/trello"
+	"github.com/psalwasser/trello-tui/internal/trello"
 )
 
 type boardsView struct {

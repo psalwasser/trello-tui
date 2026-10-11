@@ -14,10 +14,10 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/philsalwasser/trello-tui/internal/config"
-	"github.com/philsalwasser/trello-tui/internal/demo"
-	"github.com/philsalwasser/trello-tui/internal/trello"
-	"github.com/philsalwasser/trello-tui/internal/ui"
+	"github.com/psalwasser/trello-tui/internal/config"
+	"github.com/psalwasser/trello-tui/internal/demo"
+	"github.com/psalwasser/trello-tui/internal/trello"
+	"github.com/psalwasser/trello-tui/internal/ui"
 )
 
 const usage = `trello-tui — a fast terminal interface for Trello

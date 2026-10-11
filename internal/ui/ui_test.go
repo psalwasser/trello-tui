@@ -8,7 +8,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/philsalwasser/trello-tui/internal/demo"
+	"github.com/psalwasser/trello-tui/internal/demo"
 )
 
 func TestParseDue(t *testing.T) {
